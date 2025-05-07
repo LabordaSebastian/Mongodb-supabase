@@ -218,6 +218,85 @@ async function insertarDato() {
 insertarDato()
 ```
 
+## Paso 9: Script para Buscar Datos
+Crear archivo para buscar registros (`buscarDato.js`):
+```javascript
+import { supabase } from './supabase.js'
+
+async function buscarDato() {
+  try {
+    console.log('Buscando dato específico...')
+    
+    const { data, error } = await supabase
+      .from('Base_datos_ejemplo')
+      .select('*')
+      .eq('Season', '23/24')
+      .eq('Competition', 'Liga Argentina')
+      .eq('Club', 'Coassolo FC')
+      .eq('Date', '2024-05-07')
+      .eq('Opponent', 'River Plate')
+      .single()
+
+    if (error) {
+      console.error('Error al buscar:', error)
+      return
+    }
+
+    if (data) {
+      console.log('Registro encontrado:')
+      console.table(data)
+    } else {
+      console.log('No se encontró el registro')
+    }
+
+  } catch (err) {
+    console.error('Error:', err)
+  }
+}
+
+buscarDato()
+```
+
+## Paso 10: Script para Borrar Datos
+Crear archivo para borrar registros (`borrarDato.js`):
+```javascript
+import { supabase } from './supabase.js'
+
+async function borrarDato() {
+  try {
+    console.log('Intentando borrar dato específico...')
+    
+    const { data, error } = await supabase
+      .from('Base_datos_ejemplo')
+      .delete()
+      .eq('Season', '23/24')
+      .eq('Competition', 'Liga Argentina')
+      .eq('Club', 'Coassolo FC')
+      .eq('Date', '2024-05-07')
+      .eq('Opponent', 'River Plate')
+      .select()
+
+    if (error) {
+      console.error('Error al borrar:', error)
+      return
+    }
+
+    if (data && data.length > 0) {
+      console.log('Registro(s) eliminado(s):')
+      console.table(data)
+      console.log('✅ Eliminación exitosa')
+    } else {
+      console.log('❌ No se encontró el registro para eliminar')
+    }
+
+  } catch (err) {
+    console.error('Error:', err)
+  }
+}
+
+borrarDato()
+```
+
 ## Uso
 ```bash
 # Ver registros
@@ -225,6 +304,12 @@ node verRegistros.js
 
 # Insertar nuevo registro
 node insertarDato.js
+
+# Buscar registro específico
+node buscarDato.js
+
+# Borrar registro específico
+node borrarDato.js
 ```
 
 ## Solución de Problemas Comunes
