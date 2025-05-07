@@ -19,6 +19,7 @@ Se genera el archivo ciudades.json, base de datos que contiene las 20 ciudades m
   "continente": "Sudamérica"
 }
 
+
 🖥 3. Configuración de MongoDB
 Instalación de MongoDB local e inicio
 Se sigue el tutorial de instalación en Ubuntu
