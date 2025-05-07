@@ -1,5 +1,5 @@
-# Mongodb-supabase
-Repositorio dedicado a la implementacion de base de datos
+# Supabase
+Guia de como implementar un base de datos en supabase
 
 ## Supabase
 
