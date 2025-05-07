@@ -331,3 +331,5 @@ node borrarDato.js
 - Mantener el archivo `.env` en `.gitignore`
 - Usar siempre la `anon` key para conexiones desde el cliente
 - Las políticas RLS deben configurarse adecuadamente para permitir las operaciones necesarias
+
+contrasena database:ws6bNvpLWytKu52m
