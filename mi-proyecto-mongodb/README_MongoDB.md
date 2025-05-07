@@ -57,7 +57,6 @@ sudo systemctl start mongodb
 sudo systemctl enable mongodb
 sudo systemctl status mongodb
 ```
-
 ---
 
 ## Probar funcionamiento con `mongosh`
