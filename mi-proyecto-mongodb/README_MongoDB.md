@@ -30,7 +30,7 @@ Ideal para:
 
 | Característica      | MongoDB                    | Bases de Datos Relacionales |
 |---------------------|----------------------------|-----------------------------|
-| Modelo de datos     | Documentos BSON (tipo JSON) | Tablas y filas              |
+| Modelo de datos     | Documentos BSON (tipo JSON) | Tablas y filas             |
 | Esquema             | Flexible                   | Fijo                        |
 | Joins               | Limitados                  | Amplio soporte              |
 | Escalabilidad       | Horizontal (sharding)      | Mayormente vertical         |
@@ -57,7 +57,6 @@ sudo systemctl start mongodb
 sudo systemctl enable mongodb
 sudo systemctl status mongodb
 ```
-
 ---
 
 ## Probar funcionamiento con `mongosh`
