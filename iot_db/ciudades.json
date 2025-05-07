@@ -1,0 +1,23 @@
+[
+    { "nombre": "Tokio", "pais": "Japón", "poblacion": 37435191, "continente": "Asia" },
+    { "nombre": "Delhi", "pais": "India", "poblacion": 34666000, "continente": "Asia" },
+    { "nombre": "Shanghái", "pais": "China", "poblacion": 28516904, "continente": "Asia" },
+    { "nombre": "Dhaka", "pais": "Bangladesh", "poblacion": 23209616, "continente": "Asia" },
+    { "nombre": "São Paulo", "pais": "Brasil", "poblacion": 22619736, "continente": "América del Sur" },
+    { "nombre": "Ciudad de México", "pais": "México", "poblacion": 22281442, "continente": "América del Norte" },
+    { "nombre": "El Cairo", "pais": "Egipto", "poblacion": 21323000, "continente": "África" },
+    { "nombre": "Mumbai", "pais": "India", "poblacion": 20668000, "continente": "Asia" },
+    { "nombre": "Beijing", "pais": "China", "poblacion": 20897000, "continente": "Asia" },
+    { "nombre": "Osaka", "pais": "Japón", "poblacion": 19111000, "continente": "Asia" },
+    { "nombre": "Nueva York", "pais": "Estados Unidos", "poblacion": 18823000, "continente": "América del Norte" },
+    { "nombre": "Karachi", "pais": "Pakistán", "poblacion": 16459000, "continente": "Asia" },
+    { "nombre": "Buenos Aires", "pais": "Argentina", "poblacion": 15258000, "continente": "América del Sur" },
+    { "nombre": "Chongqing", "pais": "China", "poblacion": 16382000, "continente": "Asia" },
+    { "nombre": "Estambul", "pais": "Turquía", "poblacion": 15415197, "continente": "Europa/Asia" },
+    { "nombre": "Kolkata", "pais": "India", "poblacion": 15133888, "continente": "Asia" },
+    { "nombre": "Manila", "pais": "Filipinas", "poblacion": 14406059, "continente": "Asia" },
+    { "nombre": "Tianjin", "pais": "China", "poblacion": 14011828, "continente": "Asia" },
+    { "nombre": "Guangzhou", "pais": "China", "poblacion": 13964637, "continente": "Asia" },
+    { "nombre": "Lagos", "pais": "Nigeria", "poblacion": 13463000, "continente": "África" }
+  ]
+  
