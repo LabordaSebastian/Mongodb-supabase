@@ -84,7 +84,7 @@ db.usuarios.insertMany([
 ])
 
 // Buscar por campo
-db.usuarios.find({ edad: 25 })
+db.usuarios.find({ edad: 24 })
 
 // Eliminar uno por campo
 db.usuarios.deleteOne({ nombre: "Ana" })
