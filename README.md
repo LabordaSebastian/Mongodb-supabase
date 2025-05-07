@@ -112,6 +112,24 @@ export const supabase = createClient(supabaseUrl, supabaseKey)
    - Type (text)
    - Goal_assist (text)
 
+5. SQL para configurar columnas:
+```sql
+-- Ejecutar en SQL Editor
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Season" text;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Competition" text;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Date" date;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Venue" text;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Club" text;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Opponent" text;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Result" text;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Playing_Position" text;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Minute" text;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Matchday" text;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "At_score" text;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Type" text;
+ALTER TABLE "Base_datos_ejemplo" ADD COLUMN IF NOT EXISTS "Goal_assist" text;
+```
+
 ## Paso 6: Configurar RLS (Row Level Security)
 En SQL Editor de Supabase:
 ```sql
