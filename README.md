@@ -33,3 +33,198 @@ Supabase combina varias tecnologías de código abierto para proporcionar funcio
 - ❌ **Comunidad más pequeña**: Ecosistema más reducido que alternativas como Firebase
 - ❌ **Menos documentación**: Al ser más nuevo, tiene menos recursos y ejemplos
 - ❌ **Limitaciones en tiempo real**: Las funcionalidades en tiempo real son más básicas que Firebase
+
+# Guía de Configuración y Uso de Supabase con Node.js
+
+## Requisitos Previos
+- Node.js v18 o superior
+- Una cuenta en Supabase
+- npm (Node Package Manager)
+
+## Paso 1: Crear el Proyecto
+```bash
+# Crear directorio del proyecto
+mkdir mi-proyecto-supabase
+cd mi-proyecto-supabase
+
+# Inicializar proyecto Node.js
+npm init -y
+
+# Instalar dependencias necesarias
+npm install @supabase/supabase-js dotenv
+```
+
+## Paso 2: Configurar Supabase
+1. Ir a [app.supabase.com](https://app.supabase.com)
+2. Crear nuevo proyecto
+3. Guardar las credenciales:
+   - URL del proyecto
+   - anon/public key (¡NO la service_role key!)
+
+## Paso 3: Configurar el Entorno
+Crear archivo `.env`:
+```properties
+SUPABASE_URL=tu_url_de_supabase
+SUPABASE_ANON_KEY=tu_anon_key
+```
+
+## Paso 4: Configurar Cliente Supabase
+Crear archivo `supabase.js`:
+```javascript
+import { createClient } from '@supabase/supabase-js'
+import * as dotenv from 'dotenv'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+import path from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+const envPath = path.resolve(__dirname, '.env')
+
+const result = dotenv.config({ path: envPath })
+if (result.error) {
+    console.error('Error loading .env:', result.error)
+    process.exit(1)
+}
+
+const supabaseUrl = process.env.SUPABASE_URL
+const supabaseKey = process.env.SUPABASE_ANON_KEY
+
+export const supabase = createClient(supabaseUrl, supabaseKey)
+```
+
+## Paso 5: Crear Tabla en Supabase
+1. Ir al Dashboard de Supabase
+2. Table Editor → New Table
+3. Nombre: "Base_datos_ejemplo"
+4. Columnas:
+   - Season (text)
+   - Competition (text)
+   - Matchday (text)
+   - Date (date)
+   - Venue (text)
+   - Club (text)
+   - Opponent (text)
+   - Result (text)
+   - Playing_Position (text)
+   - Minute (text)
+   - At_score (text)
+   - Type (text)
+   - Goal_assist (text)
+
+## Paso 6: Configurar RLS (Row Level Security)
+En SQL Editor de Supabase:
+```sql
+-- Habilitar RLS
+ALTER TABLE "Base_datos_ejemplo" ENABLE ROW LEVEL SECURITY;
+
+-- Política para permitir lectura a todos los usuarios
+CREATE POLICY "Allow select for all users" 
+ON "public"."Base_datos_ejemplo"
+FOR SELECT 
+TO authenticated
+USING (true);
+
+-- Política para permitir inserción a todos los usuarios
+CREATE POLICY "Allow insert for all users"
+ON "public"."Base_datos_ejemplo"
+FOR INSERT
+TO authenticated
+WITH CHECK (true);
+```
+
+## Paso 7: Scripts de Consulta
+Crear archivo para ver registros (`verRegistros.js`):
+```javascript
+import { supabase } from './supabase.js'
+
+async function verRegistros() {
+  try {
+    console.log('Consultando datos...')
+    const { data, error } = await supabase
+      .from('Base_datos_ejemplo')
+      .select('*')
+      .order('Season', { ascending: true })
+      .limit(10)
+    
+    if (error) {
+      console.error('Error:', error)
+      return
+    }
+    
+    console.log('Registros encontrados:', data.length)
+    console.table(data)
+  } catch (err) {
+    console.error('Error:', err)
+  }
+}
+
+verRegistros()
+```
+
+## Paso 8: Script para Insertar Datos
+Crear archivo para insertar registros (`insertarDato.js`):
+```javascript
+import { supabase } from './supabase.js'
+
+async function insertarDato() {
+  try {
+    const { data, error } = await supabase
+      .from('Base_datos_ejemplo')
+      .insert([
+        {
+          Season: '23/24',
+          Competition: 'Liga Argentina',
+          Matchday: '1',
+          Date: '2024-05-07',
+          Venue: 'H',
+          Club: 'Ejemplo FC',
+          Opponent: 'Rival FC',
+          Result: '3:0',
+          Playing_Position: 'ST',
+          Minute: '90',
+          At_score: '3:0',
+          Type: 'Header',
+          Goal_assist: 'Asistidor'
+        }
+      ])
+      .select()
+
+    if (error) throw error
+    console.log('Dato insertado:', data)
+  } catch (err) {
+    console.error('Error:', err)
+  }
+}
+
+insertarDato()
+```
+
+## Uso
+```bash
+# Ver registros
+node verRegistros.js
+
+# Insertar nuevo registro
+node insertarDato.js
+```
+
+## Solución de Problemas Comunes
+1. **Error "supabaseUrl is required"**
+   - Verificar archivo `.env`
+   - Verificar que dotenv esté cargando correctamente
+
+2. **Error "RLS"**
+   - Verificar políticas de seguridad en Supabase
+   - Configurar RLS correctamente
+
+3. **No se encuentran registros**
+   - Verificar que la tabla exista
+   - Verificar que haya datos importados
+   - Verificar permisos RLS
+
+## Notas Importantes
+- Nunca compartir la `service_role` key
+- Mantener el archivo `.env` en `.gitignore`
+- Usar siempre la `anon` key para conexiones desde el cliente
+- Las políticas RLS deben configurarse adecuadamente para permitir las operaciones necesarias
